@@ -39,3 +39,7 @@ Webflow에서 export한 파일 이름이 다르면 `public/index.html`의 `<link
 - 업로드는 `--only-newer`로 바뀐 파일만 올리고, 서버에 있는 다른 파일은 **삭제하지 않습니다**.
   서버에서 오래된 파일까지 정리하려면 `deploy.yml`의 `mirror`에 `--delete`를 추가하세요 (해당 폴더에 다른 파일이 없는지 먼저 확인).
 - HTTPS(SSL)는 Strato 관리화면에서 www.leeheemoon.com에 SSL 인증서를 활성화하면 됩니다.
+
+## 작업 흐름
+
+작업 브랜치 → Pull Request → `main`에 Merge 하면 자동으로 www.leeheemoon.com에 배포됩니다.
