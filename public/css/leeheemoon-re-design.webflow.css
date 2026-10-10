@@ -2891,7 +2891,7 @@
   width: 100vw;
   height: 100vh;
   transform-style: preserve-3d;
-  transform: perspective(2000px)rotateX(0)rotateY(.01deg)rotateZ(0);
+  transform: perspective(2000px)translateZ(-150px)rotateX(0)rotateY(.01deg)rotateZ(0);
 }
 
 .full-percent-video {
@@ -2917,7 +2917,7 @@
   height: 100vh;
   transform-style: preserve-3d;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   position: absolute;
   inset: 0%;
@@ -3035,7 +3035,8 @@
 
 .media-container {
   transform-style: preserve-3d;
-  transform: translate3d(0, 0, 1500px);
+  margin-top: calc(50vh - 278px);
+  transform: translate3d(0, 0, 1650px);
 }
 
 .medial-flex {
@@ -5400,7 +5401,7 @@
   }
 
   .media-container {
-    transform: translate3d(0, 0, 1500px);
+    transform: translate3d(0, 0, 1650px);
   }
 
   .right-cover {
@@ -6569,7 +6570,7 @@
 
   .rotation-container {
     width: 100%;
-    transform: perspective(2000px)rotate(0);
+    transform: perspective(2000px)translateZ(-150px)rotate(0);
   }
 
   .course-video-container {
@@ -8711,7 +8712,12 @@
   }
 
   .media-container {
-    transform: translate3d(0, 0, 950px);
+    margin-top: calc(50vh - 172px);
+    transform: translate3d(0, 0, 1050px);
+  }
+
+  .rotation-container {
+    transform: perspective(2000px)translateZ(-100px);
   }
 
   .play-button {
