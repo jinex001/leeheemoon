@@ -1,0 +1,33 @@
+name: Deploy to Strato
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Upload public/ to Strato via SFTP
+        env:
+          HOST: ${{ secrets.STRATO_HOST }}
+          USER: ${{ secrets.STRATO_USER }}
+          PASS: ${{ secrets.STRATO_PASSWORD }}
+          REMOTE_DIR: ${{ vars.STRATO_REMOTE_DIR || '/' }}
+        run: |
+          lftp -u "$USER","$PASS" "sftp://$HOST" -e "
+            set sftp:auto-confirm yes;
+            set net:max-retries 3;
+            mirror --reverse --verbose --only-newer --exclude-glob .gitkeep public/ '$REMOTE_DIR';
+            bye
+          "
