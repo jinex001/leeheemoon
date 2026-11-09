@@ -548,12 +548,12 @@
   </div>
   <div class="right-cover mobile">
     <div class="website-academy-buttons left">
-      <div id="prev-button" class="rotate-180">
-        <div class="text-block-13"></div>
+      <div id="prev-button" class="wheel-arrow">
+        <div class="text-block-13"></div>
       </div>
     </div>
     <div id="next-button" class="website-academy-buttons">
-      <div class="text-block-13"></div>
+      <div class="text-block-13"></div>
     </div>
   </div>
   <div class="navi_mobile home">
@@ -672,6 +672,24 @@ $('a').each(function() {
       isSwiping = false;
     }, { passive: true });
   });
+</script>
+  <script>
+// Phones: put the wheel arrows just below the front card's title.
+(function () {
+  var cover = document.querySelector('.right-cover.mobile');
+  if (!cover) return;
+  function place() {
+    if (window.innerWidth > 479) { cover.style.top = ''; return; }
+    var best = 0;
+    document.querySelectorAll('.carosel_title').forEach(function (t) {
+      var r = t.getBoundingClientRect();
+      if (r.width > best) { best = r.width; cover.style.top = Math.round(r.bottom + window.scrollY + 14) + 'px'; }
+    });
+  }
+  window.addEventListener('load', place);
+  window.addEventListener('resize', place);
+  place();
+})();
 </script>
 </body>
 </html>

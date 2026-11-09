@@ -8949,3 +8949,56 @@
     padding-right: 0;
   }
 }
+
+/* Back button: hidden once the page is scrolled (see js/back-button.js). */
+.button-back {
+  transition: opacity .25s, transform .25s;
+}
+
+.button-back.is-scrolled-away {
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+/* Project wheel arrows: same blue square as the home slider arrows. */
+.right-cover.mobile {
+  gap: 10px;
+}
+
+.right-cover.mobile .website-academy-buttons,
+.right-cover.mobile .website-academy-buttons.left {
+  background-color: var(--heemoon-blue);
+  filter: drop-shadow(0 0 5px #0000001a);
+  border: 0;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  display: flex;
+  transform: none;
+}
+
+.right-cover.mobile .wheel-arrow {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.right-cover.mobile .text-block-13 {
+  color: var(--white);
+  font-family: Heemoon, sans-serif;
+  font-size: 14px;
+  line-height: 100%;
+}
+
+@media screen and (max-width: 479px) {
+  .right-cover.mobile {
+    top: 78vh;
+    bottom: auto;
+  }
+}

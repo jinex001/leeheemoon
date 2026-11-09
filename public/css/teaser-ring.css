@@ -88,17 +88,24 @@
 }
 
 .teaser-ring__arrow {
+  /* Same look as the home slider arrows: 30px blue square, Heemoon icon glyph. */
   position: absolute;
   top: 0;
   z-index: 1000;
-  width: 40px;
-  height: 40px;
-  margin-top: -20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  padding: 0;
   border: 0;
   background: var(--ring-blue);
+  filter: drop-shadow(0 0 5px #0000001a);
   color: #fff;
-  font-size: 22px;
-  line-height: 40px;
+  font-family: Heemoon, sans-serif;
+  font-size: 14px;
+  line-height: 100%;
   cursor: pointer;
 }
 
@@ -114,5 +121,5 @@
     gap: 10px;
     margin-top: 10px;
   }
-  .teaser-ring__arrow { position: static; margin-top: 0; width: 44px; height: 44px; line-height: 44px; font-size: 20px; }
+  .teaser-ring__arrow { position: static; margin-top: 0; }
 }

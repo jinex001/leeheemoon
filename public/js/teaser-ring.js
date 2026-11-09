@@ -22,8 +22,8 @@
     items.forEach(function (t, i) { if (t.mp4) released.push(i); });
 
     var stage = el('div', 'teaser-ring__stage');
-    var prev = el('button', 'teaser-ring__arrow teaser-ring__arrow--prev', '&#8592;');
-    var next = el('button', 'teaser-ring__arrow teaser-ring__arrow--next', '&#8594;');
+    var prev = el('button', 'teaser-ring__arrow teaser-ring__arrow--prev', '\ue90b');
+    var next = el('button', 'teaser-ring__arrow teaser-ring__arrow--next', '\ue90c');
     prev.setAttribute('aria-label', kr ? '이전 티저' : 'Previous teaser');
     next.setAttribute('aria-label', kr ? '다음 티저' : 'Next teaser');
     var controls = el('div', 'teaser-ring__controls');
