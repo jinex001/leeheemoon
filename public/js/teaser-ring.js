@@ -33,7 +33,7 @@
     root.appendChild(stage);
     controls.appendChild(prev);
     controls.appendChild(next);
-    root.appendChild(controls);
+    stage.appendChild(controls);
 
     function upcomingLabel(t) {
       if (kr) return t.date + ' 공개';
@@ -77,8 +77,8 @@
       // data-radius (spacing, in card widths) and data-side-scale (size of the back cards).
       var opt = function (k, d) { var v = parseFloat(root.getAttribute('data-' + k)); return isNaN(v) ? d : v; };
       cw = Math.round(narrow ? w * 0.90 : Math.min(w * opt('card-width', 0.56), 620));
-      R = narrow ? cw * 0.55 : cw * opt('radius', 0.82);
-      sideScale = narrow ? 1 : opt('side-scale', 1);
+      R = narrow ? cw * 0.55 : cw * opt('radius', 0.52);
+      sideScale = narrow ? 1 : opt('side-scale', 0.7);
       depth = narrow ? 0.7 : 1;
       var ch = Math.round(cw * 920 / 1080);
       stage.style.height = (ch + 40) + 'px';
@@ -108,14 +108,14 @@
 
     function animate() {
       var diff = target - pos;
-      if (reduceMotion || Math.abs(diff) < 0.002) {
+      if (reduceMotion || Math.abs(diff) < 0.01) {
         pos = target;
         render();
         raf = null;
         settle();
         return;
       }
-      pos += diff * 0.12;
+      pos += diff * 0.16;
       render();
       raf = requestAnimationFrame(animate);
     }
