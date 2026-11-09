@@ -9,6 +9,8 @@
 }
 
 .teaser-ring__stage {
+  /* Same blue as the title bar, so title + ring read as one section. */
+  background-color: var(--ring-blue);
   position: relative;
   width: 100%;
   overflow: hidden;
