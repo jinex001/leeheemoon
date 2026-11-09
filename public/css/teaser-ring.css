@@ -56,12 +56,12 @@
 .teaser-ring__card.is-front .teaser-ring__num { display: none; }
 
 .teaser-ring__card.is-upcoming {
-  background: linear-gradient(160deg, #e9e9ef, #c9c9d6);
+  background: #000;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: var(--ring-blue);
+  color: #fff;
   font-family: Poppins, Nanumsquareroundotfr, sans-serif;
   text-align: center;
 }
