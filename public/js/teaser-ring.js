@@ -33,7 +33,7 @@
     root.appendChild(stage);
     controls.appendChild(prev);
     controls.appendChild(next);
-    root.appendChild(controls);
+    stage.appendChild(controls);
 
     function upcomingLabel(t) {
       if (kr) return t.date + ' 공개';
@@ -64,19 +64,21 @@
     var cur = released.length ? released[released.length - 1] : 0;
 
     function updateTitle() {
-      var t = items[cur];
-      var name = (kr ? '민요삼천리 티저 #' : 'Minyo Samcheonri Teaser #') + t.n;
-      title.textContent = t.mp4 ? name : name + ' · ' + upcomingLabel(t);
+      title.textContent = kr ? '민요삼천리 티저' : 'Minyo Samcheonri Teaser';
     }
     var pos = cur;        // animated position (float, in card units)
     var target = cur;
-    var cw = 0, R = 0, depth = 0, raf = null, video = null;
+    var cw = 0, R = 0, depth = 0, sideScale = 1, raf = null, video = null;
 
     function measure() {
       var w = stage.clientWidth;
       var narrow = w < 600;
-      cw = Math.round(narrow ? w * 0.90 : Math.min(w * 0.56, 620));
-      R = narrow ? cw * 0.55 : cw * 0.82;
+      // Desktop layout can be tuned per page: data-card-width (share of the stage),
+      // data-radius (spacing, in card widths) and data-side-scale (size of the back cards).
+      var opt = function (k, d) { var v = parseFloat(root.getAttribute('data-' + k)); return isNaN(v) ? d : v; };
+      cw = Math.round(narrow ? w * 0.90 : Math.min(w * opt('card-width', 0.56), 620));
+      R = narrow ? cw * 0.55 : cw * opt('radius', 0.52);
+      sideScale = narrow ? 1 : opt('side-scale', 0.7);
       depth = narrow ? 0.7 : 1;
       var ch = Math.round(cw * 920 / 1080);
       stage.style.height = (ch + 40) + 'px';
@@ -96,7 +98,8 @@
         var x = Math.sin(th) * R;
         var z = (Math.cos(th) - 1) * R * depth;
         var front = (Math.cos(th) + 1) / 2;   // 1 at front, 0 at back
-        c.style.transform = 'translateX(' + x.toFixed(1) + 'px) translateZ(' + z.toFixed(1) + 'px) rotateY(' + (-th * 0.45).toFixed(3) + 'rad)';
+        var sc = 1 - (1 - sideScale) * (1 - front);
+        c.style.transform = 'translateX(' + x.toFixed(1) + 'px) translateZ(' + z.toFixed(1) + 'px) rotateY(' + (-th * 0.45).toFixed(3) + 'rad) scale(' + sc.toFixed(3) + ')';
         c.style.opacity = (0.25 + 0.75 * front).toFixed(3);
         c.style.zIndex = Math.round(front * 100);
         c.style.filter = front > 0.98 ? 'none' : 'brightness(' + (0.55 + 0.45 * front).toFixed(2) + ')';
@@ -105,14 +108,14 @@
 
     function animate() {
       var diff = target - pos;
-      if (reduceMotion || Math.abs(diff) < 0.002) {
+      if (reduceMotion || Math.abs(diff) < 0.01) {
         pos = target;
         render();
         raf = null;
         settle();
         return;
       }
-      pos += diff * 0.12;
+      pos += diff * 0.16;
       render();
       raf = requestAnimationFrame(animate);
     }

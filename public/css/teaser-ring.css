@@ -9,6 +9,8 @@
 }
 
 .teaser-ring__stage {
+  /* Same blue as the title bar, so title + ring read as one section. */
+  background-color: var(--ring-blue);
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -83,24 +85,24 @@
 }
 
 .teaser-ring__controls {
+  /* Stacked on the right, vertically centred on the stage, like the home slider's arrows. */
   position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(var(--stage-h, 300px) / 2);
-  height: 0;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .teaser-ring__arrow {
-  /* Same look as the home slider arrows: 30px blue square, Heemoon icon glyph. */
-  position: absolute;
-  top: 0;
-  z-index: 1000;
+  /* Home-slider arrow shape: 30px square with the Heemoon icon glyph. */
   display: flex;
   justify-content: center;
   align-items: center;
   width: 30px;
   height: 30px;
-  margin-top: -15px;
   padding: 0;
   border: 0;
   background: var(--ring-blue);
@@ -112,8 +114,6 @@
   cursor: pointer;
 }
 
-.teaser-ring__arrow--prev { left: 0; }
-.teaser-ring__arrow--next { right: 0; }
 
 @media (max-width: 600px) {
   /* Phones: side cards are visible and swiping turns the ring, so no arrows. */
