@@ -27,9 +27,11 @@
     prev.setAttribute('aria-label', kr ? '이전 티저' : 'Previous teaser');
     next.setAttribute('aria-label', kr ? '다음 티저' : 'Next teaser');
     var nav = el('div', 'teaser-ring__nav');
+    var controls = el('div', 'teaser-ring__controls');
     root.appendChild(stage);
-    stage.appendChild(prev);
-    stage.appendChild(next);
+    controls.appendChild(prev);
+    controls.appendChild(next);
+    root.appendChild(controls);
     root.appendChild(nav);
 
     function upcomingLabel(t) {
@@ -71,11 +73,12 @@
     function measure() {
       var w = stage.clientWidth;
       var narrow = w < 600;
-      cw = Math.round(narrow ? w * 0.70 : Math.min(w * 0.56, 620));
-      R = narrow ? cw * 0.62 : cw * 0.82;
+      cw = Math.round(narrow ? w * 0.90 : Math.min(w * 0.56, 620));
+      R = narrow ? cw * 0.55 : cw * 0.82;
       depth = narrow ? 0.7 : 1;
       var ch = Math.round(cw * 920 / 1080);
       stage.style.height = (ch + 40) + 'px';
+      root.style.setProperty('--stage-h', (ch + 40) + 'px');
       cards.forEach(function (c) { c.style.width = cw + 'px'; c.style.marginLeft = (-cw / 2) + 'px'; });
       render();
     }

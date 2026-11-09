@@ -79,9 +79,17 @@
   word-break: keep-all;
 }
 
+.teaser-ring__controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--stage-h, 300px) / 2);
+  height: 0;
+}
+
 .teaser-ring__arrow {
   position: absolute;
-  top: 50%;
+  top: 0;
   z-index: 1000;
   width: 40px;
   height: 40px;
@@ -129,8 +137,14 @@
 }
 
 @media (max-width: 600px) {
-  .teaser-ring__nav { flex-wrap: nowrap; gap: 4px; }
-  .teaser-ring__nav button { flex: 1 1 0; min-width: 0; padding: 5px 2px; font-size: 13px; }
-  .teaser-ring__nav button small { font-size: 10px; }
-  .teaser-ring__arrow { width: 32px; height: 32px; margin-top: -16px; line-height: 32px; font-size: 18px; }
+  .teaser-ring__controls {
+    position: static;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .teaser-ring__arrow { position: static; margin-top: 0; width: 44px; height: 44px; line-height: 44px; font-size: 20px; }
+  .teaser-ring__nav { display: none; }
 }
