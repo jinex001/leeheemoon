@@ -81,7 +81,8 @@
       var ch = Math.round(cw * 920 / 1080);
       stage.style.height = (ch + 40) + 'px';
       root.style.setProperty('--stage-h', (ch + 40) + 'px');
-      cards.forEach(function (c) { c.style.width = cw + 'px'; c.style.marginLeft = (-cw / 2) + 'px'; });
+      // Explicit pixel height: iOS Safari ignored aspect-ratio once a playing video sat inside.
+      cards.forEach(function (c) { c.style.width = cw + 'px'; c.style.height = ch + 'px'; c.style.marginLeft = (-cw / 2) + 'px'; });
       render();
     }
 
@@ -170,7 +171,9 @@
     // Drag / swipe to spin.
     var startX = null, startPos = 0, moved = false;
     stage.addEventListener('pointerdown', function (e) {
-      if (e.target.closest('button') || e.target.tagName === 'VIDEO') return;
+      if (e.target.closest('button')) return;
+      // Swiping over the playing video turns the ring too, except on its control bar at the bottom.
+      if (e.target.tagName === 'VIDEO' && e.clientY > e.target.getBoundingClientRect().bottom - 56) return;
       startX = e.clientX; startPos = target; moved = false;
       stage.classList.add('is-dragging');
     });
