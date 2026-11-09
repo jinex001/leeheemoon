@@ -123,3 +123,12 @@
   }
   .teaser-ring__arrow { position: static; margin-top: 0; }
 }
+
+/* Rounded corners matching the project-page wheel cards (20px, 15px on phones). */
+.teaser-ring__card {
+  border-radius: 20px;
+}
+
+@media (max-width: 479px) {
+  .teaser-ring__card { border-radius: 15px; }
+}
