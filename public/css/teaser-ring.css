@@ -85,10 +85,11 @@
 }
 
 .teaser-ring__controls {
-  /* Stacked at the top right, like the arrows on the home (What's new) slider. */
+  /* Stacked on the right, vertically centred on the stage, like the home slider's arrows. */
   position: absolute;
-  top: 10px;
+  top: 50%;
   right: 10px;
+  transform: translateY(-50%);
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -104,10 +105,9 @@
   height: 30px;
   padding: 0;
   border: 0;
-  /* Inverted (white square, blue icon) so it stands out on the blue stage. */
-  background: #fff;
+  background: var(--ring-blue);
   filter: drop-shadow(0 0 5px #0000001a);
-  color: var(--ring-blue);
+  color: #fff;
   font-family: Heemoon, sans-serif;
   font-size: 14px;
   line-height: 100%;
