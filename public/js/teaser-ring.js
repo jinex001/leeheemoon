@@ -27,6 +27,9 @@
     prev.setAttribute('aria-label', kr ? '이전 티저' : 'Previous teaser');
     next.setAttribute('aria-label', kr ? '다음 티저' : 'Next teaser');
     var controls = el('div', 'teaser-ring__controls');
+    var title = el('div', 'teaser-ring__title');
+    title.setAttribute('aria-live', 'polite');
+    root.appendChild(title);
     root.appendChild(stage);
     controls.appendChild(prev);
     controls.appendChild(next);
@@ -36,7 +39,7 @@
       if (kr) return t.date + ' 공개';
       var m = t.date.split('.');
       var months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      return 'Coming ' + months[+m[0]] + ' ' + (+m[1]);
+      return 'Coming ' + months[+m[0]] + '\u00a0' + (+m[1]);
     }
 
     var cards = items.map(function (t, i) {
@@ -59,6 +62,12 @@
 
     // Start on the most recently released teaser.
     var cur = released.length ? released[released.length - 1] : 0;
+
+    function updateTitle() {
+      var t = items[cur];
+      var name = (kr ? '민요삼천리 티저 #' : 'Minyo Samcheonri Teaser #') + t.n;
+      title.textContent = t.mp4 ? name : name + ' · ' + upcomingLabel(t);
+    }
     var pos = cur;        // animated position (float, in card units)
     var target = cur;
     var cw = 0, R = 0, depth = 0, raf = null, video = null;
@@ -118,6 +127,7 @@
       if (d > N / 2) d -= N;
       target += d;
       cur = i;
+      updateTitle();
       stopVideo();
       if (!raf) raf = requestAnimationFrame(animate);
     }
@@ -179,12 +189,14 @@
       if (moved) {
         target = Math.round(target);
         cur = ((target % N) + N) % N;
+        updateTitle();
         if (!raf) raf = requestAnimationFrame(animate);
         setTimeout(function () { moved = false; }, 0);
       }
     });
 
     window.addEventListener('resize', measure);
+    updateTitle();
     measure();
     settle();
   }

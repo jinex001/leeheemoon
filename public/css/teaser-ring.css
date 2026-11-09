@@ -25,7 +25,6 @@
   left: 50%;
   aspect-ratio: 1080 / 920;
   background: #000;
-  border: 1px solid var(--ring-blue);
   overflow: hidden;
   will-change: transform, opacity;
   box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
@@ -131,4 +130,21 @@
 
 @media (max-width: 479px) {
   .teaser-ring__card { border-radius: 15px; }
+}
+
+/* Title above the carousel; follows the card in front. Same look as the page's album title. */
+.teaser-ring__title {
+  background-color: var(--ring-blue);
+  color: #fff;
+  text-align: left;
+  padding: 5px;
+  font-family: Poppins, Nanumsquareroundotfr, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 26px;
+  word-break: keep-all;
+}
+
+@media (max-width: 479px) {
+  .teaser-ring__title { font-size: 17px; line-height: 23px; }
 }
