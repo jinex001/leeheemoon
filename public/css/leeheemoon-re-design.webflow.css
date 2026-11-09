@@ -8936,3 +8936,16 @@
   font-style: normal;
   font-display: swap;
 }
+/* Phones: detail-page content box at 95% of the screen width (was ~85%). */
+@media screen and (max-width: 479px) {
+  .album.detail-wrap,
+  .album.detail-wrap.image-bg {
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
+  }
+
+  .album.detail-wrap .contents-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
