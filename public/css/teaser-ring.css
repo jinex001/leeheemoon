@@ -1,0 +1,150 @@
+/* 360° teaser carousel (Minyo Samcheonri). Cards sit on a circle and always face the viewer. */
+.teaser-ring {
+  --ring-blue: #0106c7;
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.teaser-ring__stage {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  perspective: 1400px;
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.teaser-ring__stage.is-dragging { cursor: grabbing; }
+
+.teaser-ring__card {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  aspect-ratio: 1080 / 920;
+  background: #000;
+  overflow: hidden;
+  will-change: transform, opacity;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+}
+
+.teaser-ring__card img,
+.teaser-ring__card video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+.teaser-ring__card .teaser-ring__num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 4px 10px;
+  background: var(--ring-blue);
+  color: #fff;
+  font-family: Poppins, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.teaser-ring__card.is-front .teaser-ring__num { display: none; }
+
+.teaser-ring__card.is-upcoming {
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: Poppins, Nanumsquareroundotfr, sans-serif;
+  text-align: center;
+}
+
+.teaser-ring__card.is-upcoming .teaser-ring__big {
+  font-size: clamp(40px, 9vw, 96px);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.teaser-ring__card.is-upcoming .teaser-ring__date {
+  margin-top: 10px;
+  font-size: clamp(14px, 2.2vw, 22px);
+  font-weight: 500;
+  word-break: keep-all;
+}
+
+.teaser-ring__controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--stage-h, 300px) / 2);
+  height: 0;
+}
+
+.teaser-ring__arrow {
+  /* Same look as the home slider arrows: 30px blue square, Heemoon icon glyph. */
+  position: absolute;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  padding: 0;
+  border: 0;
+  background: var(--ring-blue);
+  filter: drop-shadow(0 0 5px #0000001a);
+  color: #fff;
+  font-family: Heemoon, sans-serif;
+  font-size: 14px;
+  line-height: 100%;
+  cursor: pointer;
+}
+
+.teaser-ring__arrow--prev { left: 0; }
+.teaser-ring__arrow--next { right: 0; }
+
+@media (max-width: 600px) {
+  .teaser-ring__controls {
+    position: static;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .teaser-ring__arrow { position: static; margin-top: 0; }
+}
+
+/* Rounded corners matching the project-page wheel cards (20px, 15px on phones). */
+.teaser-ring__card {
+  border-radius: 20px;
+}
+
+@media (max-width: 479px) {
+  .teaser-ring__card { border-radius: 15px; }
+}
+
+/* Title above the carousel; follows the card in front. Same look as the page's album title. */
+.teaser-ring__title {
+  background-color: var(--ring-blue);
+  color: #fff;
+  text-align: left;
+  padding: 5px;
+  font-family: Poppins, Nanumsquareroundotfr, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 26px;
+  word-break: keep-all;
+}
+
+@media (max-width: 479px) {
+  .teaser-ring__title { font-size: 17px; line-height: 23px; }
+}
