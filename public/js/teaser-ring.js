@@ -26,13 +26,11 @@
     var next = el('button', 'teaser-ring__arrow teaser-ring__arrow--next', '&#8594;');
     prev.setAttribute('aria-label', kr ? '이전 티저' : 'Previous teaser');
     next.setAttribute('aria-label', kr ? '다음 티저' : 'Next teaser');
-    var nav = el('div', 'teaser-ring__nav');
     var controls = el('div', 'teaser-ring__controls');
     root.appendChild(stage);
     controls.appendChild(prev);
     controls.appendChild(next);
     root.appendChild(controls);
-    root.appendChild(nav);
 
     function upcomingLabel(t) {
       if (kr) return t.date + ' 공개';
@@ -56,13 +54,8 @@
       }
       c.addEventListener('click', function () { if (!moved) go(i); });
       stage.appendChild(c);
-
-      var b = el('button', '', '#' + t.n + (t.mp4 ? '' : '<small>' + (kr ? t.date : upcomingLabel(t).replace('Coming ', '')) + '</small>'));
-      b.addEventListener('click', function () { go(i); });
-      nav.appendChild(b);
       return c;
     });
-    var navButtons = nav.querySelectorAll('button');
 
     // Start on the most recently released teaser.
     var cur = released.length ? released[released.length - 1] : 0;
@@ -126,7 +119,6 @@
       target += d;
       cur = i;
       stopVideo();
-      updateNav();
       if (!raf) raf = requestAnimationFrame(animate);
     }
 
@@ -162,10 +154,6 @@
       if (p && p.catch) p.catch(function () {});
     }
 
-    function updateNav() {
-      for (var k = 0; k < navButtons.length; k++) navButtons[k].classList.toggle('is-active', k === cur);
-    }
-
     prev.addEventListener('click', function () { go((cur - 1 + N) % N); });
     next.addEventListener('click', function () { go((cur + 1) % N); });
 
@@ -191,14 +179,12 @@
       if (moved) {
         target = Math.round(target);
         cur = ((target % N) + N) % N;
-        updateNav();
         if (!raf) raf = requestAnimationFrame(animate);
         setTimeout(function () { moved = false; }, 0);
       }
     });
 
     window.addEventListener('resize', measure);
-    updateNav();
     measure();
     settle();
   }
