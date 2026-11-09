@@ -8664,7 +8664,7 @@
   }
 
   .slide-4.deeplove {
-    transform: rotateX(0)rotateY(276.92deg)rotateZ(0);
+    transform: rotateX(0)rotateY(282.857deg)rotateZ(0);
   }
 
   .slide-4.ordermade {
@@ -9000,5 +9000,33 @@
   .right-cover.mobile {
     top: 78vh;
     bottom: auto;
+  }
+}
+
+/* Project page on phones: size the wheel to the visible screen (svh, which
+   excludes the browser bars) and lock scrolling, so it opens centred and
+   never slides under the bottom navigation. */
+@media screen and (max-width: 479px) {
+  html:has(body.body-12),
+  body.body-12 {
+    height: 100svh;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  body.body-12 ._360-wheel-container {
+    position: fixed;
+    inset: 0;
+    height: 100svh;
+  }
+
+  body.body-12 .rotation-container,
+  body.body-12 .slide-4,
+  body.body-12 .rotate-this-slider {
+    height: 100svh;
+  }
+
+  body.body-12 .media-container {
+    margin-top: calc(50svh - 172px);
   }
 }
